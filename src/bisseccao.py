@@ -13,7 +13,7 @@ def bissecao(f,a,b,prec):
     if f(m)*f(a) < 0: return bissecao(f,a,m,prec)
     else: return bissecao(f,m,b,prec)
 
-def funcao(x):
-    return x**3 + 0.82*x**2 - 12.4577*x + 4.21686
+
+f = lambda x: x**4 - 2.36343*(x**3) - 18.1163*(x**2) + 20.7595*x + 58.8273
 
 

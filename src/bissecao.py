@@ -1,10 +1,11 @@
-f = lambda x: x**3 + 0.82*(x**2) - 12.4577*x + 4.421686
-intervalo = {'a': -4.3, 'b': -4.0}
+def f(x):
+    return x**4 - 2.36343*(x**3) - 18.1163*(x**2) + 20.7595*x + 58.8273
+intervalo = {'a': -3.2, 'b': 4.8}
 
 def ponto_medio(x, y):
     return (x + y)/2
 
-max_iteracoes = 100 # evita loops infinitos
+max_iteracoes = 1000 # evita loops infinitos
 n = 0
 result = -1
 erro = 0.0001
