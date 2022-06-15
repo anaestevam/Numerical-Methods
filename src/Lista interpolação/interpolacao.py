@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 import math
 def bilinear_interpolation(x, y, points):
