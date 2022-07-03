@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+//https://www.wake-up-neo.com/pt/c++/como-implemento-uma-curva-de-bezier-em-c/958008869/
 enum
 {
 	BEZIER_RECURSIVA,
