@@ -25,11 +25,11 @@ def eliminacao_gauss(A, b, pivotamento_parcial=False):
 
     return x
 
-def residuo_normal(A, b, x):
-    b_calculated = np.dot(A, x)
-    residual = b - b_calculated
-    norm = np.linalg.norm(residual)
-    return norm
+def residuo_norma(A, b, x):
+    b_calculado = np.dot(A, x)
+    residual = b - b_calculado
+    norma = np.linalg.norm(residual)
+    return norma
 
 def refinamento(A, b, x, iterations):
     n = len(A)
@@ -58,25 +58,25 @@ def read_input_file(filename):
 #            file.write(f"x{i+1} = {x[i]}\n")
 #        file.write(f"Residuo normal: {norm}\n")
 
-A, b = read_input_file('m2.in')
+A, b = read_input_file('m1.in')
 
-pivot_choice = int(input("Escolha a opção de pivotamento:\n1. Sem pivotamento parcial\n2. Com pivotamento parcial\n"))
-refinement_iterations = int(input("Digite o número de iterações para refinamento: "))
+opcao = int(input("Escolha a opção de pivotamento:\n1. Sem pivotamento parcial\n2. Com pivotamento parcial\n"))
+refinamento_iteracao = int(input("Digite o número de iterações para refinamento: "))
 
-if pivot_choice == 1:
+if opcao == 1:
     x = eliminacao_gauss(A, b)
-elif pivot_choice == 2:
+elif opcao == 2:
     x = eliminacao_gauss(A, b, pivotamento_parcial=True)
 else:
     print("Escolha inválida.")
 
-x_refined = refinamento(A, b, x, refinement_iterations)
+x_refined = refinamento(A, b, x, refinamento_iteracao)
 
-residual_norm_initial = residuo_normal(A, b, x)
-residual_norm_refined = residuo_normal(A, b, x_refined)
+residual_norm_inicial = residuo_norma(A, b, x)
+residual_norm_refined = residuo_norma(A, b, x_refined)
 
 #write_output_file('output/m1.out', x_refined, residual_norm_refined)
 
-print("Resultado escrito no arquivo 'output/m2.out'.")
-print("Norma do vetor residual antes do refinamento:", residual_norm_initial)
+# print("Resultado escrito no arquivo 'output/m1.out'.")
+print("Norma do vetor residual antes do refinamento:", residual_norm_inicial)
 print("Norma do vetor residual após o refinamento:", residual_norm_refined)
