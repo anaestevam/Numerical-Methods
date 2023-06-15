@@ -52,14 +52,14 @@ def read_file(filename):
             b[i] = float(line[n])
     return A, b
 
-# def write_output_file(filename, x, norm):
-#     with open(filename, 'w') as file:
-#         file.write("Solução:\n")
-#         for i in range(len(x)):
-#            file.write(f"x{i+1} = {x[i]}\n")
-#         file.write(f"Residuo normal: {norm}\n")
+def write_output_file(filename, x, norm):
+    with open(filename, 'w') as file:
+         file.write("Solução:\n")
+         for i in range(len(x)):
+            file.write(f"x{i+1} = {x[i]}\n")
+         file.write(f"Residuo normal: {norm}\n")
 
-A, b = read_file('m0.in')
+A, b = read_file('m1.in')
 
 opcao = int(input("Escolha a opção de pivotamento:\n1. Sem pivotamento parcial\n2. Com pivotamento parcial\n"))
 refinamento_iteracao = int(input("Digite o número de iterações para refinamento: "))
@@ -81,7 +81,7 @@ x_refined = refinamento(A, b, x, refinamento_iteracao)
 #calcular norma do vetor residual após o refinamento
 residual_norm_refined = residuo_norma(A, b, x_refined)
 
-# write_output_file('output/m1.out', x_refined, residual_norm_refined)
+write_output_file('output/m1.out', x_refined, residual_norm_refined)
 
 print("Resultado escrito no arquivo 'output/m1.out'.")
 print("Norma do vetor residual antes do refinamento:", residual_norm_inicial)
