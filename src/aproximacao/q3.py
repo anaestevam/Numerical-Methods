@@ -17,7 +17,6 @@ sum_y = np.sum(y)
 sum_xy = np.sum(x * y)
 sum_x_quadrado_y = np.sum(x**2 * y)
 
-# Calcular os coeficientes da regressão quadrática
 denominator = (n * sum_x_quadrado * sum_x_quarta - sum_x_cubo**2 - n * sum_x_quadrado**2 + 2 * sum_x * sum_x_cubo * sum_x_quadrado - sum_x_quarta * sum_x)
 a = (sum_y * sum_x_quadrado * sum_x_quarta - sum_x * sum_xy * sum_x_quarta - sum_y * sum_x_cubo * sum_x_quadrado + sum_x_quadrado_y * sum_x_cubo + sum_xy * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
 b = (-sum_y * sum_x_cubo * sum_x_quadrado + sum_x * sum_xy * sum_x_quadrado - sum_xy * sum_x_quarta + sum_x_quadrado_y * sum_x_cubo + sum_y * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
