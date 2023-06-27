@@ -9,6 +9,7 @@ n = len(cotacao_dolar)
 x = cotacao_dolar
 y = preco_equipamentos
 
+n = len(cotacao_dolar)
 sum_x = np.sum(x)
 sum_x_quadrado = np.sum(x**2)
 sum_x_cubo = np.sum(x**3)
@@ -17,24 +18,33 @@ sum_y = np.sum(y)
 sum_xy = np.sum(x * y)
 sum_x_quadrado_y = np.sum(x**2 * y)
 
-denominator = (n * sum_x_quadrado * sum_x_quarta - sum_x_cubo**2 - n * sum_x_quadrado**2 + 2 * sum_x * sum_x_cubo * sum_x_quadrado - sum_x_quarta * sum_x)
-a = (sum_y * sum_x_quadrado * sum_x_quarta - sum_x * sum_xy * sum_x_quarta - sum_y * sum_x_cubo * sum_x_quadrado + sum_x_quadrado_y * sum_x_cubo + sum_xy * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
-b = (-sum_y * sum_x_cubo * sum_x_quadrado + sum_x * sum_xy * sum_x_quadrado - sum_xy * sum_x_quarta + sum_x_quadrado_y * sum_x_cubo + sum_y * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
-c = (sum_y * sum_x_quadrado * sum_x_quarta - sum_x * sum_xy * sum_x_quarta - sum_x_quadrado_y * sum_x_cubo + sum_x_quadrado_y * sum_x_quadrado - sum_xy * sum_x_quadrado**2 + sum_x * sum_x_cubo * sum_x_quadrado) / denominator
+A = np.array([[n, sum_x, sum_x_quadrado],
+              [sum_x, sum_x_quadrado, sum_x_cubo],
+              [sum_x_quadrado, sum_x_cubo, sum_x_quarta]])
 
-def funcao_quadratica(x):
-    return a * x**2 + b * x + c
+B = np.array([sum_y, sum_xy, sum_x_quadrado_y])
+
+coeficientes = np.linalg.solve(A, B)
+a, b, c = coeficientes
+# denominator = (n * sum_x_quadrado * sum_x_quarta - sum_x_cubo**2 - n * sum_x_quadrado**2 + 2 * sum_x * sum_x_cubo * sum_x_quadrado - sum_x_quarta * sum_x)
+#a = (sum_y * sum_x_quadrado * sum_x_quarta - sum_x * sum_xy * sum_x_quarta - sum_y * sum_x_cubo * sum_x_quadrado + sum_x_quadrado_y * sum_x_cubo + sum_xy * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
+#b = (-sum_y * sum_x_cubo * sum_x_quadrado + sum_x * sum_xy * sum_x_quadrado - sum_xy * sum_x_quarta + sum_x_quadrado_y * sum_x_cubo + sum_y * sum_x_quadrado**2 - sum_x_quadrado_y * sum_x * sum_x_quadrado) / denominator
+#c = (sum_y * sum_x_quadrado * sum_x_quarta - sum_x * sum_xy * sum_x_quarta - sum_x_quadrado_y * sum_x_cubo + sum_x_quadrado_y * sum_x_quadrado - sum_xy * sum_x_quadrado**2 + sum_x * sum_x_cubo * sum_x_quadrado) / denominator
+
+def funcao_polinomial(x):
+    return a + x * b + x**2 * c
 
 cotacao_estimada = 5.50
-preco_estimado = funcao_quadratica(cotacao_estimada)
+# preco_estimado = funcao_quadratica(cotacao_estimada)
 
-print("Coeficiente a:", a)
-print("Coeficiente b:", b)
-print("Coeficiente c:", c)
+preco_estimado = funcao_polinomial(cotacao_estimada)
+print("MATRIZ:", A)
+print("TERMOS INDEPENDENTES:", B)
+print("Coeficientes:", coeficientes)
 print("Estimativa de preço para dólar a R$5,50: R$", preco_estimado)
 
 plt.scatter(cotacao_dolar, preco_equipamentos, label='Dados Originais')
-plt.plot(cotacao_dolar, funcao_quadratica(cotacao_dolar), color='red', label='Função Quadrática Ajustada')
+plt.plot(cotacao_dolar, funcao_polinomial(cotacao_dolar), color='red', label='Função Polinomial')
 plt.xlabel('Cotação do Dólar')
 plt.ylabel('Preço dos Equipamentos')
 plt.title('Regressão Quadrática')
