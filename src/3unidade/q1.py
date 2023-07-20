@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def f(x):
-    return x**3 + np.cos(x)
+    return x**3 + np.sin(x)
 
-m = 8
+m = 6
 x = np.linspace(-np.pi, np.pi, m+1)
 y = f(x)
 a = np.zeros(m+1)
@@ -25,9 +25,9 @@ for i in range(len(x_interp)):
 x_true = np.linspace(-np.pi, np.pi, 100)
 y_true = x_true**3 + np.cos(x_true)
 
-plt.plot(x_true, y_true, label='Função Interpolada')
+plt.plot(x_true, y_true, label='Função x**3+sin(x)')
 plt.plot(x, y, 'ro', label='Pontos')
-plt.plot(x_interp, y_interp, label='')
+plt.plot(x_interp, y_interp, label='Função interpolada')
 plt.legend()
 plt.xlabel('x')
 plt.ylabel('f(x)')

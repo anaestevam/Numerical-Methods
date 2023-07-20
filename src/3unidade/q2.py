@@ -19,7 +19,7 @@ def fourier_coefficients(f, T, N):
 
     return a0, a, b
 def f(x):
-    return x**3 + np.cos(x)
+    return x**3 + np.sin(x)
 
 T = 2*np.pi  #Período da função
 N = 8  #Num coeficientes
